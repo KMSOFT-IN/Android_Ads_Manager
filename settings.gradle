@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 rootProject.name = "MobileAdsManager"
 include ':app'
 include ':adsManager'
-include ':unitySdk'

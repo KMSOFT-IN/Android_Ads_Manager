@@ -11,7 +11,7 @@ afterEvaluate {
 
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.3'
+                version = '1.0.4'
             }
         }
     }
@@ -43,14 +43,15 @@ android {
 
 dependencies {
 
+    implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation 'com.facebook.android:audience-network-sdk:6.12.0'
     implementation 'com.google.android.gms:play-services-ads:21.5.0'
-
-    api project(":unitySdk")
+    implementation files('/Users/imac/Documents/AndroidLibrary/Android_Ads_Manager/app/libs/unity-ads.aar')
 }
