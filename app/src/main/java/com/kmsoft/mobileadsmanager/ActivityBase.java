@@ -65,9 +65,9 @@ public class ActivityBase extends Application implements FbReward, FbRewardInter
         Utils.setUnityBannerWidth(320);
 
         // TODO set Priority
-        Utils.setFbPriority(4);
-        Utils.setGooglePriority(6);
-        Utils.setUnityPriority(7);
+        Utils.setFbPriority(7);
+        Utils.setGooglePriority(5);
+        Utils.setUnityPriority(6);
 
         // TODO load Ads
         bannerAd = new BannerAd(this);

@@ -144,13 +144,11 @@ public class RectangleAd {
                             break;
                         }
                     } else if (priorityList.get(i) == Utils.unityPriority) {
-
                         if (unityBanner != null) {
                             adContainer.addView(unityBanner);
 //                            Toast.makeText(context, "unity Ad show", Toast.LENGTH_SHORT).show();
                             break;
                         }
-
                     }
                 }
             }

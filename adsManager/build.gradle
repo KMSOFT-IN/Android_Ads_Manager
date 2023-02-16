@@ -8,7 +8,6 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
                 version = '1.0.4'
@@ -28,6 +27,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 
     buildTypes {
         release {
@@ -44,7 +50,7 @@ android {
 dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
 
     testImplementation 'junit:junit:4.13.2'
@@ -53,5 +59,11 @@ dependencies {
 
     implementation 'com.facebook.android:audience-network-sdk:6.12.0'
     implementation 'com.google.android.gms:play-services-ads:21.5.0'
-    implementation files('/Users/imac/Documents/AndroidLibrary/Android_Ads_Manager/app/libs/unity-ads.aar')
+//     implementation files('/Users/imac/Documents/AndroidLibrary/Android_Ads_Manager/app/libs/unity-ads.aar')
+    implementation files('libs/unity-ads.aar')
+    // Dependency on a local library module
+//    implementation project(':unity-ads')
+//
+//    // Dependency on local binaries
+//    implementation fileTree(dir: 'unity-ads')
 }
