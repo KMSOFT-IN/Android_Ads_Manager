@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.unity3d.adsmanager.listener.GoogleReward;
-import com.unity3d.adsmanager.listener.GoogleRewardItem;
+import com.kmsoft.adsmanager.listener.GoogleReward;
+import com.kmsoft.adsmanager.listener.GoogleRewardItem;
 
 public class Ad_Reward extends AppCompatActivity implements GoogleReward {
 

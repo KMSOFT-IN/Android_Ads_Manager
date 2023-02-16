@@ -3,14 +3,14 @@ package com.unity3d.mobileadsmanager;
 
 import android.app.Application;
 
-import com.unity3d.adsmanager.Constants.Utils;
-import com.unity3d.adsmanager.ads.BannerAd;
-import com.unity3d.adsmanager.ads.InterstitialAd;
-import com.unity3d.adsmanager.ads.RectangleAd;
-import com.unity3d.adsmanager.ads.RewardInterstitialAd;
-import com.unity3d.adsmanager.ads.Reward_Ad;
-import com.unity3d.adsmanager.listener.FbReward;
-import com.unity3d.adsmanager.listener.FbRewardInterstitial;
+import com.kmsoft.adsmanager.Constants.Utils;
+import com.kmsoft.adsmanager.ads.BannerAd;
+import com.kmsoft.adsmanager.ads.InterstitialAd;
+import com.kmsoft.adsmanager.ads.RectangleAd;
+import com.kmsoft.adsmanager.ads.RewardInterstitialAd;
+import com.kmsoft.adsmanager.ads.Reward_Ad;
+import com.kmsoft.adsmanager.listener.FbReward;
+import com.kmsoft.adsmanager.listener.FbRewardInterstitial;
 
 public class ActivityBase extends Application implements FbReward, FbRewardInterstitial {
 

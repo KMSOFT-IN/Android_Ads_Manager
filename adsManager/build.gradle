@@ -18,7 +18,7 @@ afterEvaluate {
 }
 
 android {
-    namespace 'com.unity3d.adsmanager'
+    namespace 'com.kmsoft.adsmanager'
     compileSdk 33
 
     defaultConfig {

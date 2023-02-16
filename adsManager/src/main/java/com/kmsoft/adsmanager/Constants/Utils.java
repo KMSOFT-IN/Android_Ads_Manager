@@ -1,4 +1,4 @@
-package com.unity3d.adsmanager.Constants;
+package com.kmsoft.adsmanager.Constants;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

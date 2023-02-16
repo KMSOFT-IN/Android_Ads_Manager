@@ -4,25 +4,22 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 //apply from: '../dokka.gradle'
 
-Properties properties = new Properties()
-if (project.rootProject.file('local.properties').exists()) {
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-}
+//Properties properties = new Properties()
+//if (project.rootProject.file('local.properties').exists()) {
+//    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//}
 
-ext {
-  GROUP_ID = "com.unity3d.ads"
-  ARTIFACT_ID = "unity-ads"
-  VERSION_ID = "4.5.0"
-  VERSION_CODE = 4500
-//  SIGN_AAR = properties.getProperty("SIGN_AAR") ?: false
-}
+//ext {
+//  GROUP_ID = "com.unity3d.ads"
+//  ARTIFACT_ID = "unity-ads"
+//  VERSION_ID =
+//  VERSION_CODE =
+//}
 
 android {
   compileSdkVersion 33
-  DdmPreferences.setLogLevel("verbose")
-  DdmPreferences.setTimeOut(10 * 60000)
 
-  defaultPublishConfig "release"
+//  defaultPublishConfig "release"
 
   lintOptions {
     abortOnError false
@@ -31,8 +28,8 @@ android {
   defaultConfig {
     minSdkVersion 19
     targetSdkVersion 33
-    versionCode = VERSION_CODE
-    versionName = VERSION_ID
+    versionCode = 4500
+    versionName = "4.5.0"
 
     setProperty("archivesBaseName", "unity-ads")
 
@@ -114,11 +111,11 @@ dependencies {
     testImplementation 'org.json:json:20180813'
 }
 
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set("sources")
-    archiveBaseName.set("${archivesBaseName}")
-    from android.sourceSets.main.java.srcDirs
-}
+//task androidSourcesJar(type: Jar) {
+//    archiveClassifier.set("sources")
+//    archiveBaseName.set("${archivesBaseName}")
+//    from android.sourceSets.main.java.srcDirs
+//}
 
 //task androidJavadocsJar(type: Jar, dependsOn: dokkaJavadoc) {
 //    archiveClassifier.set("javadoc")

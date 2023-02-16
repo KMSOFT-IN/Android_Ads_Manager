@@ -1,7 +1,7 @@
-package com.unity3d.adsmanager.ads;
+package com.kmsoft.adsmanager.ads;
 
 import static com.google.ads.AdRequest.LOGTAG;
-import static com.unity3d.adsmanager.Constants.Utils.sorting;
+import static com.kmsoft.adsmanager.Constants.Utils.sorting;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +16,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.unity3d.adsmanager.Constants.Utils;
+import com.kmsoft.adsmanager.Constants.Utils;
 import com.unity3d.ads.IUnityAdsInitializationListener;
 import com.unity3d.ads.IUnityAdsLoadListener;
 import com.unity3d.ads.IUnityAdsShowListener;

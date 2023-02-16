@@ -1,4 +1,4 @@
-package com.unity3d.adsmanager.listener;
+package com.kmsoft.adsmanager.listener;
 
 public interface FbRewardInterstitial {
 

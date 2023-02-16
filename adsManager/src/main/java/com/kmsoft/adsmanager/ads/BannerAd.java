@@ -1,7 +1,6 @@
-package com.unity3d.adsmanager.ads;
+package com.kmsoft.adsmanager.ads;
 
 import static com.google.ads.AdRequest.LOGTAG;
-import static com.unity3d.adsmanager.Constants.Utils.sorting;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +18,7 @@ import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.LoadAdError;
-import com.unity3d.adsmanager.Constants.Utils;
+import com.kmsoft.adsmanager.Constants.Utils;
 import com.unity3d.ads.IUnityAdsInitializationListener;
 import com.unity3d.ads.UnityAds;
 import com.unity3d.services.banners.BannerErrorInfo;
@@ -143,7 +142,7 @@ public class BannerAd {
         });
         unityBanner.load();
 
-        List<Integer> priorityList = sorting();
+        List<Integer> priorityList = Utils.sorting();
 
         new Handler().postDelayed(new Runnable() {
             @Override
