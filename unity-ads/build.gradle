@@ -1,85 +1,47 @@
-import com.android.ddmlib.DdmPreferences
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-//apply from: '../dokka.gradle'
-
-//Properties properties = new Properties()
-//if (project.rootProject.file('local.properties').exists()) {
-//    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//}
-
-//ext {
-//  GROUP_ID = "com.unity3d.ads"
-//  ARTIFACT_ID = "unity-ads"
-//  VERSION_ID =
-//  VERSION_CODE =
-//}
 
 android {
-  compileSdkVersion 33
+    compileSdkVersion 33
 
-//  defaultPublishConfig "release"
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 33
+        versionCode = 4500
+        versionName = "4.5.0"
 
-  lintOptions {
-    abortOnError false
-  }
+        buildConfigField('String', 'WEBVIEW_BRANCH', getPropertyStringWithDefaultValue('WEBVIEW_BRANCH', '"' + versionName + '"'))
+        buildConfigField('int', 'VERSION_CODE', "$versionCode")
+        buildConfigField('String', 'VERSION_NAME', "\"$versionName\"")
+        testBuildType "debug"
+        multiDexEnabled true
 
-  defaultConfig {
-    minSdkVersion 19
-    targetSdkVersion 33
-    versionCode = 4500
-    versionName = "4.5.0"
-
-    setProperty("archivesBaseName", "unity-ads")
-
-    buildConfigField('String', 'WEBVIEW_BRANCH', getPropertyStringWithDefaultValue('WEBVIEW_BRANCH', '"' + versionName + '"'))
-    buildConfigField('int', 'VERSION_CODE', "$versionCode")
-    buildConfigField('String', 'VERSION_NAME', "\"$versionName\"")
-    testBuildType "debug"
-    multiDexEnabled true
-
-    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-    testInstrumentationRunnerArguments disableAnalytics: 'true' // Won't work yet, see: https://code.google.com/p/android/issues/detail?id=188241
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-
-  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-      sourceCompatibility = JavaVersion.VERSION_1_8
-      targetCompatibility = JavaVersion.VERSION_1_8
-      kotlinOptions {
-          jvmTarget = "1.8"
-      }
-      kotlinOptions {
-          apiVersion = "1.4"
-          languageVersion = "1.4"
-          freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn" + "-Xallow-result-return-type"
-      }
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt')
-      consumerProguardFiles 'proguard-rules.pro'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles "consumer-rules.pro"
     }
-    debug {
-      minifyEnabled false
-      testCoverageEnabled true
-      consumerProguardFiles 'proguard-rules.pro'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-  }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+            jvmTarget = "1.8"
+        }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    androidTestCompileOnly project(':unity-scaradapter-2100')    
+    androidTestCompileOnly project(':unity-scaradapter-2100')
     androidTestCompileOnly project(':unity-scaradapter-2000')
     androidTestCompileOnly project(':unity-scaradapter-1950')
     androidTestCompileOnly project(':unity-scaradapter-1920')
@@ -111,33 +73,12 @@ dependencies {
     testImplementation 'org.json:json:20180813'
 }
 
-//task androidSourcesJar(type: Jar) {
-//    archiveClassifier.set("sources")
-//    archiveBaseName.set("${archivesBaseName}")
-//    from android.sourceSets.main.java.srcDirs
-//}
-
-//task androidJavadocsJar(type: Jar, dependsOn: dokkaJavadoc) {
-//    archiveClassifier.set("javadoc")
-//    archiveBaseName.set("${archivesBaseName}")
-//    from "$rootDir/../javadoc/"
-//}
-
-//artifacts {
-//    archives androidSourcesJar
-//    archives androidJavadocsJar
-//}
-
 def getPropertyStringWithDefaultValue(String key, String defaultValue) {
-  def value = project.getProperties().get(key)
-  // Ensure that string is quoted
-  if ((value != null) && (!(value ==~ /^".*"$/)) ){
-    println "Value for key '$key' is not quoted, adding quotes to '$value'"
-    value = "\"$value\""
-  }
-  return value != null ? value : defaultValue
+    def value = project.getProperties().get(key)
+    // Ensure that string is quoted
+    if ((value != null) && (!(value ==~ /^".*"$/))) {
+        println "Value for key '$key' is not quoted, adding quotes to '$value'"
+        value = "\"$value\""
+    }
+    return value != null ? value : defaultValue
 }
-
-//apply from: 'publishing.gradle'
-//apply from: 'artifactory.gradle'
-//apply from: 'jacoco.gradle'
