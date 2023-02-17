@@ -57,11 +57,11 @@ dependencies {
     androidTestImplementation 'com.google.android.gms:play-services-ads:19.5.0'
     androidTestImplementation 'com.android.billingclient:billing:4.0.0'
     compileOnly 'com.google.ar:core:1.0.0'
-    compileOnly project(':unity-scaradapter-2100')
-    compileOnly project(':unity-scaradapter-2000')
-    compileOnly project(':unity-scaradapter-1950')
-    compileOnly project(':unity-scaradapter-1920')
-    compileOnly project(':unity-scaradapter-common')
+    implementation project(':unity-scaradapter-2100')
+    implementation project(':unity-scaradapter-2000')
+    implementation project(':unity-scaradapter-1950')
+    implementation project(':unity-scaradapter-1920')
+    implementation project(':unity-scaradapter-common')
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
