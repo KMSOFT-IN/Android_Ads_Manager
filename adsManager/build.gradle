@@ -47,11 +47,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation project(path: ':unity-ads')
-    implementation project(':unity-scaradapter-2100')
-    implementation project(':unity-scaradapter-2000')
-    implementation project(':unity-scaradapter-1950')
-    implementation project(':unity-scaradapter-1920')
-    implementation project(':unity-scaradapter-common')
     implementation 'androidx.core:core-ktx:1.9.0'
 
 
