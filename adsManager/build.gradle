@@ -12,18 +12,25 @@ afterEvaluate {
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
                 version = '1.0.19'
+                artifact "$buildDir/outputs/aar/app-release.aar" //aar artifact you want to publish
 
+                //generate pom nodes for dependencies
                 pom.withXml {
                     def dependenciesNode = asNode().appendNode('dependencies')
-
-                    //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
-                    configurations.compile.allDependencies.each {
+                    configurations.compile.allDependencies.each { dependency ->
                         def dependencyNode = dependenciesNode.appendNode('dependency')
-                        dependencyNode.appendNode('groupId', it.group)
-                        dependencyNode.appendNode('artifactId', it.name)
-                        dependencyNode.appendNode('version', it.version)
+                        dependencyNode.appendNode('groupId', dependency.group)
+                        dependencyNode.appendNode('artifactId', dependency.name)
+                        dependencyNode.appendNode('version', dependency.version)
                     }
                 }
+
+            }
+        }
+
+        repositories{
+            maven {
+                url "$buildDir/repo"
             }
         }
     }
