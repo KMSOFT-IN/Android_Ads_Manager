@@ -1,0 +1,83 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId GROUP_ID
+            artifactId ARTIFACT_ID
+            version VERSION_ID
+
+            artifact("$buildDir/outputs/aar/unity-ads-release.aar")
+//            artifact androidSourcesJar
+//            artifact androidJavadocsJar
+
+            pom {
+                name = ARTIFACT_ID
+                description = 'Monetize your entire player base and reach new audiences with video ads.'
+                url = 'https://github.com/Unity-Technologies/unity-ads-android'
+                licenses {
+                    license {
+                        name = 'Unity Ads License'
+                        url = 'https://unity3d.com/legal/monetization-services-terms-of-service'
+                    }
+                }
+
+                scm {
+                    connection = 'https://github.com/Unity-Technologies/unity-ads-android.git'
+                    developerConnection = 'https://github.com/Unity-Technologies/unity-ads-android.git'
+                    url = 'https://github.com/Unity-Technologies/unity-ads-android'
+                }
+                developers {
+                    developer {
+                        id = 'Unity Ads'
+                        name = 'Unity Ads'
+                        email = 'ads-sdk@unity3d.com'
+                    }
+                }
+            }
+
+            pom.withXml {
+                def node = asNode()
+
+                // ugly hack to set the packaging property in the POM as 'aar'
+                ((NodeList) node.get('packaging')).get(0).value = 'aar'
+
+                def dependenciesNode = node.appendNode('dependencies')
+
+                def cl = { Dependency dep ->
+                    if (dep.group == null || dep.version == null || dep.name == null || dep.name == "unspecified")
+                        return // ignore invalid dependencies
+
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', dep.group)
+                    dependencyNode.appendNode('artifactId', dep.name)
+                    dependencyNode.appendNode('version', dep.version)
+
+                    if (!dep.transitive) {
+                        // If this dependency is transitive, we should force exclude all its dependencies them from the POM
+                        def exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                        exclusionNode.appendNode('groupId', '*')
+                        exclusionNode.appendNode('artifactId', '*')
+                    } else if (!dep.properties.excludeRules.empty) {
+                        // Otherwise add specified exclude rules
+                        def exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                        dep.properties.excludeRules.each { ExcludeRule rule ->
+                            exclusionNode.appendNode('groupId', rule.group ?: '*')
+                            exclusionNode.appendNode('artifactId', rule.module ?: '*')
+                        }
+                    }
+                }
+
+                // List all dependencies and write to POM
+                configurations.api.getAllDependencies().each cl
+                configurations.releaseImplementation.getAllDependencies().each cl
+            }
+        }
+    }
+}
+
+signing {
+    required { SIGN_AAR }
+    sign publishing.publications.release
+}

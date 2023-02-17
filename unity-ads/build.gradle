@@ -1,6 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+ext {
+    GROUP_ID = "com.unity3d.ads"
+    ARTIFACT_ID = "unity-ads"
+    VERSION_ID = "4.5.0"
+    VERSION_CODE = 4500
+//    SIGN_AAR = properties.getProperty("SIGN_AAR") ?: false
+}
+
+
+
 android {
     compileSdkVersion 33
 
@@ -82,3 +92,5 @@ def getPropertyStringWithDefaultValue(String key, String defaultValue) {
     }
     return value != null ? value : defaultValue
 }
+
+apply from: 'publishing.gradle'
