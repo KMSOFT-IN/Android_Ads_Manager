@@ -13,12 +13,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/adsManager" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/unity-ads" />
-            <option value="$PROJECT_DIR$/unity-scaradapter-1920" />
-            <option value="$PROJECT_DIR$/unity-scaradapter-1950" />
-            <option value="$PROJECT_DIR$/unity-scaradapter-2000" />
-            <option value="$PROJECT_DIR$/unity-scaradapter-2100" />
-            <option value="$PROJECT_DIR$/unity-scaradapter-common" />
           </set>
         </option>
       </GradleProjectSettings>

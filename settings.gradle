@@ -10,15 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-
     }
 }
 rootProject.name = "MobileAdsManager"
 include ':app'
 include ':adsManager'
-include ':unity-scaradapter-common'
-include ':unity-scaradapter-2100'
-include ':unity-scaradapter-2000'
-include ':unity-scaradapter-1950'
-include ':unity-scaradapter-1920'
-include ':unity-ads'

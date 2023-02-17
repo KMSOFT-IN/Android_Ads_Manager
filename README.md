@@ -14,7 +14,7 @@
   
   ```
   	dependencies {
-	        implementation 'com.github.KMSOFT-IN:Android_Ads_Manager:1.0.9'
+	        implementation 'com.github.KMSOFT-IN:Android_Ads_Manager:1.0.2'
 	}
   
   ```
