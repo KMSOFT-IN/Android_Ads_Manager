@@ -11,7 +11,7 @@ afterEvaluate {
 
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.4'
+                version = '1.0.17'
             }
         }
     }

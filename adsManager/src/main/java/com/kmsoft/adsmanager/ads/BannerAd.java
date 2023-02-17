@@ -93,18 +93,16 @@ public class BannerAd {
 
     public void loadUnityAd() {
 
-        UnityAds.initialize(context, "5147445", true, new IUnityAdsInitializationListener() {
+        UnityAds.initialize(context, Utils.UNITY_GAME_ID, Utils.isUnityTest, new IUnityAdsInitializationListener() {
             @Override
             public void onInitializationComplete() {
                 Log.v(LOGTAG, "Unity Ads initialization complete");
-                Toast.makeText(context, "Unity initialization", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onInitializationFailed(UnityAds.UnityAdsInitializationError error, String message) {
                 Log.e(LOGTAG, "Unity Ads initialization failed: [" + error + "] " + message);
-                Toast.makeText(context, "Unity fail", Toast.LENGTH_SHORT).show();
             }
         });
 
