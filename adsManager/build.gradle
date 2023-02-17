@@ -1,21 +1,21 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
+//    id 'maven-publish'
     id 'org.jetbrains.kotlin.android'
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.KMSOFT-IN'
-                artifactId = 'adsManager'
-                version = '1.0.13'
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                from components.release
+//                groupId = 'com.github.KMSOFT-IN'
+//                artifactId = 'adsManager'
+//                version = '1.0.13'
+//            }
+//        }
+//    }
+//}
 
 android {
     namespace 'com.kmsoft.adsmanager'
@@ -47,6 +47,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation project(path: ':unity-ads')
+    implementation project(':unity-scaradapter-2100')
+    implementation project(':unity-scaradapter-2000')
+    implementation project(':unity-scaradapter-1950')
+    implementation project(':unity-scaradapter-1920')
+    implementation project(':unity-scaradapter-common')
     implementation 'androidx.core:core-ktx:1.9.0'
 
 
@@ -57,3 +62,5 @@ dependencies {
     implementation 'com.facebook.android:audience-network-sdk:6.12.0'
     implementation 'com.google.android.gms:play-services-ads:21.5.0'
 }
+
+apply from: 'publishing.gradle'

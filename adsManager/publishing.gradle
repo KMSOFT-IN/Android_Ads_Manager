@@ -4,14 +4,16 @@ apply plugin: 'signing'
 publishing {
     publications {
         release(MavenPublication) {
-            groupId GROUP_ID
-            artifactId ARTIFACT_ID
+            groupId = 'com.github.KMSOFT-IN'
+            artifactId = 'adsManager'
             version = '1.0.13'
 
             artifact("$buildDir/outputs/aar/unity-ads-release.aar")
+//            artifact androidSourcesJar
+//            artifact androidJavadocsJar
 
             pom {
-                name = ARTIFACT_ID
+                name = 'adsManager'
                 description = 'Monetize your entire player base and reach new audiences with video ads.'
                 url = 'https://github.com/Unity-Technologies/unity-ads-android'
                 licenses {
