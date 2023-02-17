@@ -12,7 +12,6 @@ afterEvaluate {
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
                 version = '1.0.23'
-                artifact "$buildDir/outputs/aar/app-release.aar" //aar artifact you want to publish
                 artifact androidSourcesJar
 
             }
