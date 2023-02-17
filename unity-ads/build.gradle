@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 ext {
-    GROUP_ID = "com.unity3d.ads"
+    GROUP_ID = "com.github.KMSOFT-IN"
     ARTIFACT_ID = "unity-ads"
     VERSION_ID = "4.5.0"
     VERSION_CODE = 4500
