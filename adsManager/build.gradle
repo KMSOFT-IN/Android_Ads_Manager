@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'maven-publish'
 }
+apply from: '../dokka.gradle'
 
 afterEvaluate {
     publishing {
@@ -11,38 +12,38 @@ afterEvaluate {
 
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.33'
+                version = '1.0.34'
                 artifact androidSourcesJar
                 artifact androidJavadocsJar
-//                artifact("$buildDir/outputs/aar/adsManager-release.aar")
-//                pom.withXml {
-//                    final dependenciesNode = asNode().appendNode('dependencies')
-//                    ext.addDependency = { Dependency dep, String scope ->
-//                        if (dep.group == null || dep.version == null || dep.name == null || dep.name == "unspecified")
-//                            return // ignore invalid dependencies
-//                        final dependencyNode = dependenciesNode.appendNode('dependency')
-//                        dependencyNode.appendNode('groupId', dep.group)
-//                        dependencyNode.appendNode('artifactId', dep.name)
-//                        dependencyNode.appendNode('version', dep.version)
-//                        dependencyNode.appendNode('scope', scope)
-//                        if (!dep.transitive) {
-//                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
-//                            exclusionNode.appendNode('groupId', '*')
-//                            exclusionNode.appendNode('artifactId', '*')
-//                        } else if (!dep.properties.excludeRules.empty) {
-//                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
-//                            dep.properties.excludeRules.each { ExcludeRule rule ->
-//                                exclusionNode.appendNode('groupId', rule.group ?: '*')
-//                                exclusionNode.appendNode('artifactId', rule.module ?: '*')
-//                            }
-//                        }
-//                    }
-//                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, "implementation") }
-//
-//                    configurations.api.getDependencies().each { dep -> addDependency(dep, "implementation") }
-//
-//                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, "runtime") }
-//                }
+                artifact("$buildDir/outputs/aar/adsManager-release.aar")
+                pom.withXml {
+                    final dependenciesNode = asNode().appendNode('dependencies')
+                    ext.addDependency = { Dependency dep, String scope ->
+                        if (dep.group == null || dep.version == null || dep.name == null || dep.name == "unspecified")
+                            return // ignore invalid dependencies
+                        final dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', dep.group)
+                        dependencyNode.appendNode('artifactId', dep.name)
+                        dependencyNode.appendNode('version', dep.version)
+                        dependencyNode.appendNode('scope', scope)
+                        if (!dep.transitive) {
+                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                            exclusionNode.appendNode('groupId', '*')
+                            exclusionNode.appendNode('artifactId', '*')
+                        } else if (!dep.properties.excludeRules.empty) {
+                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                            dep.properties.excludeRules.each { ExcludeRule rule ->
+                                exclusionNode.appendNode('groupId', rule.group ?: '*')
+                                exclusionNode.appendNode('artifactId', rule.module ?: '*')
+                            }
+                        }
+                    }
+                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, "implementation") }
+
+                    configurations.api.getDependencies().each { dep -> addDependency(dep, "implementation") }
+
+                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, "runtime") }
+                }
 
             }
         }
@@ -101,37 +102,14 @@ task androidSourcesJar(type: Jar) {
 }
 
 
-task androidJavadocs(type: Javadoc){
-    source = android.sourceSets.main.java.srcDirs
-
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    android.libraryVariants.all{ variant->
-        if (variant.name == 'release'){
-            owner.classpath += variant.javaCompileProvider.get().classpath
-        }
-    }
-    // excluding a specific class from being documented
-    exclude '**/NameOfClassToExclude.java'
-
-    title = null
-
-    options{
-        doclet = "com.unity3d.ads"
-        docletpath = [file("/Users/imac/Documents/AndroidLibrary/Android_Ads_Manager/unity-ads/unity-ads.aar")]
-        noTimestamp = false
-
-        // show only Protected & Public
-        memberLevel = JavadocMemberLevel.PROTECTED
-    }
-
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs){
-    archiveClassifier.set('javadoc')
-    from androidJavadocs.destinationDir
+task androidJavadocsJar(type: Jar, dependsOn: dokkaJavadoc) {
+    archiveClassifier.set("javadoc")
+    archiveBaseName.set("${archivesBaseName}")
+    from "$rootDir/../javadoc/"
 }
 
 artifacts {
     archives androidSourcesJar
     archives androidJavadocsJar
 }
+
