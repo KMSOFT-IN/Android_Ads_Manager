@@ -10,9 +10,9 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.github.KMSOFT-IN'
+                groupId = 'com.github.smitkmsoft'
                 artifactId = 'adsManager'
-                version = '1.0.38'
+                version = '1.0.39'
                 artifact androidSourcesJar
                 artifact androidJavadocsJar
             }
