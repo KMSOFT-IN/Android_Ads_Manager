@@ -11,7 +11,7 @@ afterEvaluate {
 
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.31'
+                version = '1.0.32'
                 artifact androidSourcesJar
                 artifact androidJavadocsJar
                 artifact("$buildDir/outputs/aar/adsManager-release.aar")
@@ -117,7 +117,7 @@ task androidJavadocs(type: Javadoc){
 
     options{
         doclet = "com.unity3d.ads"
-        docletpath = [file("unity-ads/unity-ads.aar")]
+        docletpath = [file("/Users/imac/Documents/AndroidLibrary/Android_Ads_Manager/unity-ads/unity-ads.aar")]
         noTimestamp = false
 
         // show only Protected & Public
