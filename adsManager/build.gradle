@@ -12,47 +12,55 @@ afterEvaluate {
 
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.34'
+                version = '1.0.35'
                 artifact androidSourcesJar
                 artifact androidJavadocsJar
                 artifact("$buildDir/outputs/aar/adsManager-release.aar")
                 pom.withXml {
-                    final dependenciesNode = asNode().appendNode('dependencies')
-                    ext.addDependency = { Dependency dep, String scope ->
+                    def node = asNode()
+
+                    // ugly hack to set the packaging property in the POM as 'aar'
+                    ((NodeList) node.get('packaging')).get(0).value = 'aar'
+
+                    def dependenciesNode = node.appendNode('dependencies')
+
+                    def cl = { Dependency dep ->
                         if (dep.group == null || dep.version == null || dep.name == null || dep.name == "unspecified")
                             return // ignore invalid dependencies
-                        final dependencyNode = dependenciesNode.appendNode('dependency')
+
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
                         dependencyNode.appendNode('groupId', dep.group)
                         dependencyNode.appendNode('artifactId', dep.name)
                         dependencyNode.appendNode('version', dep.version)
-                        dependencyNode.appendNode('scope', scope)
+
                         if (!dep.transitive) {
-                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                            // If this dependency is transitive, we should force exclude all its dependencies them from the POM
+                            def exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
                             exclusionNode.appendNode('groupId', '*')
                             exclusionNode.appendNode('artifactId', '*')
                         } else if (!dep.properties.excludeRules.empty) {
-                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                            // Otherwise add specified exclude rules
+                            def exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
                             dep.properties.excludeRules.each { ExcludeRule rule ->
                                 exclusionNode.appendNode('groupId', rule.group ?: '*')
                                 exclusionNode.appendNode('artifactId', rule.module ?: '*')
                             }
                         }
                     }
-                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, "implementation") }
 
-                    configurations.api.getDependencies().each { dep -> addDependency(dep, "implementation") }
-
-                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, "runtime") }
+                    // List all dependencies and write to POM
+                    configurations.api.getAllDependencies().each cl
+                    configurations.releaseImplementation.getAllDependencies().each cl
                 }
 
             }
         }
 
-//        repositories{
-//            maven {
-//                url "$buildDir/repo"
-//            }
-//        }
+        repositories{
+            maven {
+                url "$buildDir/repo"
+            }
+        }
     }
 }
 
