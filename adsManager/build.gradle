@@ -12,7 +12,7 @@ afterEvaluate {
 
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.35'
+                version = '1.0.36'
                 artifact androidSourcesJar
                 artifact androidJavadocsJar
                 artifact("$buildDir/outputs/aar/adsManager-release.aar")
@@ -113,7 +113,7 @@ task androidSourcesJar(type: Jar) {
 task androidJavadocsJar(type: Jar, dependsOn: dokkaJavadoc) {
     archiveClassifier.set("javadoc")
     archiveBaseName.set("${archivesBaseName}")
-    from "$rootDir/../javadoc/"
+    from "$rootDir/../javadoc2/"
 }
 
 artifacts {
