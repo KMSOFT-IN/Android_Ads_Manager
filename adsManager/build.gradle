@@ -12,7 +12,7 @@ afterEvaluate {
 
                 groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.42'
+                version = '1.0.43'
                 artifact androidSourcesJar
                 artifact androidJavadocsJar
             }
