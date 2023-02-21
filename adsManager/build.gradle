@@ -10,13 +10,25 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.github.smitkmsoft'
+                groupId = 'com.github.KMSOFT-IN'
                 artifactId = 'adsManager'
-                version = '1.0.39'
+                version = '1.0.40'
                 artifact androidSourcesJar
                 artifact androidJavadocsJar
             }
 
+        }
+
+        repositories {
+            maven {
+                name = "Android_Ads_Manager"
+                // Note that your GitHub username should be in lowercase.
+                url = uri("https://maven.pkg.github.com/KMSOFT-IN/Android_Ads_Manager")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
         }
     }
 }
